@@ -6,14 +6,17 @@ Vagrant.configure("2") do |config|
 
   config.vm.provider "virtualbox" do |vb|
     vb.name = "Docker_Box"
-    vb.cpus = 4
-    vb.memory = 6048
+    vb.cpus = 6
+    vb.memory = 10048
   end
 
   # Ports
   config.vm.network :forwarded_port, guest: 22, host: 2240, id: 'ssh'
-  config.vm.network :forwarded_port, guest: 80, host: 80, id: '8080_port'
-
+  config.vm.network :forwarded_port, guest: 80, host: 80, id: '80_port'
+  #config.vm.network :forwarded_port, guest: 7474, host: 7474, id: 'neo4j'
+  #config.vm.network :forwarded_port, guest: 7687, host: 7687, id: 'bolt'
+  config.vm.network :forwarded_port, guest: 61208, host: 61208, id: 'glances'
+  config.vm.network :forwarded_port, guest: 9000, host: 9000, id: 'portainer'
 
   config.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "~/.ssh/me.pub"
   config.vm.provision "file", source: "~/.ssh/id_rsa", destination: "~/.ssh/me.private"
@@ -27,7 +30,7 @@ Vagrant.configure("2") do |config|
 
  
   config.vm.synced_folder "shared/deploy", "/opt/deploy"
-  config.vm.synced_folder "shared/develop", "/develop"git@github.com:dvillaj/compose-rstudio.git
+  config.vm.synced_folder "shared/develop", "/develop"
   config.vm.provision "shell", inline: "/opt/deploy/install.sh"
 
 end

@@ -11,3 +11,9 @@ Vagrant to create a Ubuntu local box used to play with the following items:
 ```
 vagrant up
 ```
+
+## Connect by SSH
+
+```
+ssh root@localhost -p 2240 -o "StrictHostKeyChecking no" 
+```

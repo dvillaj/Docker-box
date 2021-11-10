@@ -21,6 +21,11 @@ function installDocker {
     usermod -aG docker vagrant
 }
 
+function installGlances {
+    echo "Installing Glances ..."
+   
+    apt install -y glances
+}
 
 
 echo "Setting up Docker box ..."
